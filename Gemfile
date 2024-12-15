@@ -55,6 +55,9 @@ group :development, :test do
 
   # https://github.com/thoughtbot/shoulda-matchers
   gem 'shoulda-matchers', '~> 6.0'
+
+  # https://github.com/faker-ruby/faker
+  gem 'faker'
 end
 
 group :development do
