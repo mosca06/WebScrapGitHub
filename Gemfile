@@ -58,6 +58,9 @@ group :development, :test do
 
   # https://github.com/faker-ruby/faker
   gem 'faker'
+
+  # https://github.com/teamcapybara/capybara
+  gem "capybara"
 end
 
 group :development do
