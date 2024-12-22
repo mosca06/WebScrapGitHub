@@ -1,0 +1,26 @@
+<nav class="navbar" style="background-color: #333; color: white; padding: 10px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; height: 50px;">
+    <ul style="list-style: none; display: flex; margin: 0; padding: 0; width: 100%; align-items: center;">
+      <% if user_signed_in? %>
+        <li style="margin-right: 20px;">
+          Olá, <span style="font-weight: bold;"><%= current_user.email %></span>
+        </li>
+        <li style="margin-left: auto;">
+          <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, 
+          data: { confirm: 'Tem certeza que deseja sair?' }, 
+                style: 'text-decoration: none; color: #f2f2f2; background-color: #c0392b; 
+                        padding: 8px 12px; border-radius: 4px; font-weight: bold;' %>
+        </li>
+      <% else %>
+      <li style="margin-right: 20px;">
+        Olá, <span style="font-weight: bold;">Visitante</span>
+      </li>
+        <li style="margin-left: auto;">
+          <%= link_to 'Login', new_user_session_path, 
+                style: 'text-decoration: none; color: #f2f2f2; background-color: #2980b9; 
+                        padding: 8px 12px; border-radius: 4px; font-weight: bold;' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
