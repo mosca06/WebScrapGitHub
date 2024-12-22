@@ -5,6 +5,10 @@
         <li style="margin-right: 20px;">
           Olá, <span style="font-weight: bold;"><%= current_user.email %></span>
         </li>
+        <li>
+          <%= link_to 'Dashboard', dashboard_users_path, 
+          style: 'text-decoration: none; color: #f2f2f2;font-weight: bold;' %>
+        </li>
         <li style="margin-left: auto;">
           <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, 
           data: { confirm: 'Tem certeza que deseja sair?' }, 
