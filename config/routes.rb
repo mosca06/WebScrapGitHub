@@ -12,4 +12,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'homepage#index'
+
+  resources :users, only: [] do
+    collection do
+      get 'dashboard'
+    end
+  end
 end
