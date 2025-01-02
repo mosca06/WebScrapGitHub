@@ -32,9 +32,13 @@ module Webscrap
 
     def fetch_html_page
       @link = "https://github.com/#{@profile[:name]}"
-      @doc = Nokogiri::HTML(URI.open(@link))
+      @doc = Nokogiri::HTML(open_link)
     rescue OpenURI::HTTPError
       @profile.errors.add(:base, 'Erro, perfil não encontrado ')
+    end
+
+    def open_link
+      URI.parse(@link).open
     end
 
     def find_total_followers
@@ -53,16 +57,17 @@ module Webscrap
     end
 
     def find_company
-      company_link = @doc.at_css('span.p-org')
-      company_link&.at_css('div')&.text
+      company_link = @doc.at_css('li[itemprop="worksFor"] span div')
+      company_link&.text
     end
 
     def find_location
-      @doc.at_css('span.p-label')&.text
+      location = @doc.at_css('li[itemprop="homeLocation"] span.p-label')
+      location&.text
     end
 
     def find_linkedin
-      @doc.at_css('a.Link--primary')&.attr('href')
+      @doc.at_css('a[class="Link--primary"]')&.attr('href')
     end
   end
 end

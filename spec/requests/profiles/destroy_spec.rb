@@ -3,11 +3,14 @@
 require 'rails_helper'
 
 describe '/profiles' do
-  let(:user) { User.create(email: 'mail@mail.com', password: '123456') }
-  let(:profile) { Profile.create(name: 'mosca06', user: user) }
+  before do
+    mock_from_file('mosca06')
+  end
+
+  let(:profile) { create(:profile, name: 'mosca06') }
 
   before(:each) do
-    login_as(user, scope: :user)
+    login_as(profile.user, scope: :user)
   end
   describe 'success' do
     it 'DELETE /' do

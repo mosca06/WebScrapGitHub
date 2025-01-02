@@ -3,14 +3,17 @@
 require 'rails_helper'
 
 describe '/profiles' do
-  let(:user) { User.create(email: 'mail@mail.com', password: '123456') }
+  let(:user) { create(:user) }
   before(:each) do
     login_as(user, scope: :user)
   end
   describe 'success' do
     it 'POST /' do
-      params = { profile: { name: 'teste' } }
+      mock_from_file('mosca06')
+
+      params = { profile: { name: 'mosca06' } }
       post '/profiles', params: params
+      expect(response).to have_http_status(:found)
       expect(response).to have_http_status(:found)
       expect(Profile.where(name: params[:profile][:name]).size).to eq(1)
     end
@@ -22,8 +25,12 @@ describe '/profiles' do
       expect(Profile.where(name: params[:profile][:name]).size).to eq(0)
     end
     it 'POST /' do
+      allow_any_instance_of(Webscrap::GitHub).to receive(:open_link)
+        .and_raise(OpenURI::HTTPError.new('404 Not Found', StringIO.new))
+
       params = { profile: { name: '3rf23425' } }
       post '/profiles', params: params
+
       expect(Profile.where(name: params[:profile][:name]).size).to eq(0)
     end
   end

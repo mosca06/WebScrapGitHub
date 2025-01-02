@@ -3,14 +3,19 @@
 require 'rails_helper'
 
 describe '/profiles' do
-  let(:user) { User.create(email: 'mail@mail.com', password: '123456') }
+  let(:user) { create(:user) }
+
   before(:each) do
     login_as(user, scope: :user)
   end
   describe 'success' do
     it 'GET /' do
-      profile1 = create(:profile, name: 'mosca06', user: user)
-      profile2 = create(:profile, name: 'xitarps', user: user)
+      mock_from_file('mosca06')
+      profile1 = create(:profile, name: 'mosca06', user:)
+
+      mock_from_file('xitarps')
+      profile2 = create(:profile, name: 'xitarps', user:)
+
       get '/profiles'
       expect(response.body).to include(profile1.name, profile2.name)
     end
