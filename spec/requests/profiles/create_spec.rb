@@ -11,7 +11,7 @@ describe '/profiles' do
     it 'POST /' do
       params = { profile: { name: 'teste' } }
       post '/profiles', params: params
-      expect(response).to have_http_status(:created)
+      expect(response).to have_http_status(:found)
       expect(Profile.where(name: params[:profile][:name]).size).to eq(1)
     end
   end
@@ -19,7 +19,11 @@ describe '/profiles' do
     it 'POST /' do
       params = { profile: { name: '' } }
       post '/profiles', params: params
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(Profile.where(name: params[:profile][:name]).size).to eq(0)
+    end
+    it 'POST /' do
+      params = { profile: { name: '3rf23425' } }
+      post '/profiles', params: params
       expect(Profile.where(name: params[:profile][:name]).size).to eq(0)
     end
   end

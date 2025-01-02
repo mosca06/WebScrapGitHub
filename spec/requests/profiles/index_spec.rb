@@ -9,8 +9,8 @@ describe '/profiles' do
   end
   describe 'success' do
     it 'GET /' do
-      profile1 = create(:profile, user: user)
-      profile2 = create(:profile, user: user)
+      profile1 = create(:profile, name: 'mosca06', user: user)
+      profile2 = create(:profile, name: 'xitarps', user: user)
       get '/profiles'
       expect(response.body).to include(profile1.name, profile2.name)
     end

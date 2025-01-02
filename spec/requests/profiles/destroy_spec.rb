@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe '/profiles' do
   let(:user) { User.create(email: 'mail@mail.com', password: '123456') }
-  let(:profile) { Profile.create(name: 'Old Name', user: user) }
+  let(:profile) { Profile.create(name: 'mosca06', user: user) }
 
   before(:each) do
     login_as(user, scope: :user)

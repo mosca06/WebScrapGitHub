@@ -1,8 +1,12 @@
 <p> 
   <%= profile.name %>
+  <%= profile.location %>
+  <%= profile.company %>
+  <%= profile.following_count %>
+
   <% if action_name == 'index' %> 
     <%= link_to "Show", profile %>
     <%= link_to "Edit", edit_profile_path(profile) %>
     <%= link_to "Delete", profile_path(profile), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-  <% end %>
+    <% end %>
 </p>
