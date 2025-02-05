@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
 
   def create
     @profile = current_user.profiles.new(profile_params)
-    return redirect_to @profile, status: :created if @profile.save
+    return redirect_to @profile if @profile.save
 
     render :new, status: :unprocessable_entity
   end

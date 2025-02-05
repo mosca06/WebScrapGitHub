@@ -1,5 +1,6 @@
+<%= render 'shared/errors', object: profile %>
 <%= link_to "Index" , profiles_path %>
-<%= form_with model: profile do |form| %>
+<%= form_with model: profile, data: { turbo: false } do |form| %>
   <%= form.label "name", :name %>
   <%= form.text_field :name %>   
   

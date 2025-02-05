@@ -3,4 +3,5 @@ class Profile < ApplicationRecord
 
   validates :name, uniqueness: { scope: :user_id }
   validates :name, presence: true
+  before_validation -> { Webscrap::GitHub.call(self) }
 end
