@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :fetch_profile, only: %i[show edit update destroy]
+  before_action :fetch_profile, only: %i[show edit update destroy refresh]
 
   def index
     @profiles = current_user.profiles
@@ -30,6 +30,10 @@ class ProfilesController < ApplicationController
   def destroy
     @profile.destroy
     redirect_to profiles_path
+  end
+
+  def refresh
+    redirect_to profiles_path if @profile.update(updated_at: Time.current)
   end
 
   private

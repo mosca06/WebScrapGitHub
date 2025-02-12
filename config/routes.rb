@@ -19,5 +19,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :profiles
+  resources :profiles do
+    patch :refresh, on: :member
+  end
 end
