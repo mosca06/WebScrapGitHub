@@ -3,12 +3,12 @@
   <%= profile.location %>
   <%= profile.company %>
   <%= profile.following_count %>
-  <%= profile.linkedin %>
+  <%= profile.linkedin.truncate(20) if profile.linkedin.present? %>
 
   <% if action_name == 'index' %> 
     <%= link_to "Show", profile %>
     <%= link_to "Edit", edit_profile_path(profile) %>
     <%= link_to "Delete", profile_path(profile), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-    <% end %>
-    <% end %>
+    <%= link_to "Refresh", refresh_profile_path(profile), method: :patch, data: { turbo_method: :patch } %>
+  <% end %>
 </p>
